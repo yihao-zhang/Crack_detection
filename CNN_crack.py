@@ -15,9 +15,6 @@ from keras.preprocessing.image import ImageDataGenerator
 NAME = 'crack-cnn-{}'.format(int(time.time()))
 tensorboard = TensorBoard(log_dir = 'logs/{}'.format(NAME))
 
-#X = pickle.load(open('X.pkl', 'rb'))
-#y = pickle.load(open('y.pkl', 'rb'))
-
 train_datagen = ImageDataGenerator(rescale = 1./255, validation_split = 0.2)
 train_dir = 'input_data'
 train_generator = train_datagen.flow_from_directory(
@@ -59,9 +56,6 @@ model.compile(
         loss = 'categorical_crossentropy',
         metrics = ['accuracy'] 
         )
-
-#history = model.fit(X,y, batch_size= 20, epochs=20,
-#                    validation_split= 0.2, callbacks=[tensorboard])
 
 history = model.fit_generator(
         train_generator,
